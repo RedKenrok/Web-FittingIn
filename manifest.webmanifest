@@ -1,0 +1,35 @@
+{
+	"name": "Fitting in!",
+	"short_name": "Fitting in!",
+	"description": "Play together with a friend and have them quickly strike the right pose.",
+	"start_url": "/index.html?utm_source=homescreen",
+	
+	"display": "fullscreen",
+	"background_color": "#fff",
+	"theme_color": "#222",
+	"icons": [{
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F512.png?v=1579033831276",
+		"sizes": "512x512",
+		"type": "image/png"
+	}, {
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F256.png?v=1579031999152",
+		"sizes": "256x256",
+		"type": "image/png"
+	}, {
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F128.png?v=1579031999274",
+		"sizes": "128x128",
+		"type": "image/png"
+	}, {
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F64.png?v=1579031999363",
+		"sizes": "64x64",
+		"type": "image/png"
+	}, {
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F32.png?v=1579031999324",
+		"sizes": "32x32",
+		"type": "image/png"
+	}, {
+		"src": "https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F16.png?v=1579031999416",
+		"sizes": "16x16",
+		"type": "image/png"
+	}]
+}

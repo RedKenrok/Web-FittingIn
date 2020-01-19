@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-GB">
+  <head>
+    <title>Fitting in!</title>
+    
+    <script>
+      // Redirect http requests to https!
+      if (location.protocol == 'http:') {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+    </script>
+    
+    <!-- Meta data -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Play together with a friend and have them quickly strike the right pose." />
+    <meta name="keywords" content="fitting in, neural network, machine learning, artificial intelligence, TensorFlow.js, PoseNet" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="512x512" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F512.png?v=1579033831276" />
+    <link rel="icon" type="image/png" sizes="256x256" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F256.png?v=1579031999152" />
+    <link rel="icon" type="image/png" sizes="128x128" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F128.png?v=1579031999274" />
+    <link rel="icon" type="image/png" sizes="64x64" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F64.png?v=1579031999363" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F32.png?v=1579031999324" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F16.png?v=1579031999416" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.com/45fac9be-f037-4be4-8b14-ab2624cdefd6%2F512.png?v=1579033831276" />
+    
+    <!-- Progressive web app -->
+    <meta name="theme-color" content="#222" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <script>
+      // Register service worker.
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+      }
+    </script>
+    
+    <!-- Style libraries -->
+    <link href="https://unpkg.com/tailwindcss@^1.1/dist/base.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/styles/base.css" rel="stylesheet" />
+    <link href="/styles/app.css" rel="stylesheet" />
+    <link href="/styles/menu.css" rel="stylesheet" />
+  </head>
+  
+  <body>
+    <nav id="menu-bar">
+      <!-- Menu toggle -->
+      <a id="menu-toggle">
+        <div class="icon">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </a>
+    </nav>
+      
+    <div id="menu-drawer">
+      <div class="menu-bar-offset"></div>
+      
+      <section>
+        <div class="spacer"></div>
+        
+        <div class="container">
+          <!-- App about -->
+          <h1 id="title">Fitting in</h1>
+          <p>
+            Fitting in is a two person co-operative game where one player takes control of the phone, the other stands in front of the back facing camera. The phone holder then has to tell -not show- the other how to has to pose themself based on the instruction on screen. The better you do the more points you will earn.
+          </p>
+          <p>
+            The game utilizes PoseNet a neural network model build for Tensorflow.js made by Google's Deepmind team. Thanks to Tensorflow.js' ability to run locally on the browser all calculations happen on the device itself to ensure your privacy.
+          </p>
+          <h2 id="requirements">Requirements</h2>
+          <p>
+            To play the game grab a friend and open this webpage on a recent version of Chrome or Firefox using an Android device with a backwards facing camera. (Might work on other devices and browsers but has not been tested.)
+          </p>
+          
+          <!-- Development about -->
+          <h2 id="development">Development</h2>
+          <p>
+            This game has been made by <a href="https://www.rondekker.nl" target="_blank" rel="noreferrer noopener">Ron Dekker</a> and <a href="https://linkedin.com/in/jesse-deerenberg-b324113b" target="_blank" rel="noreferrer noopener">Jesse Deerenberg</a> during the Global Game Jam of 2019.
+          </p>
+          
+          <!-- Glitch about -->
+          <h2 id="glitch">Glitch</h2>
+          <p>
+            This project has been hosted with Glitch.com, where you can <a href="" id="link-glitch-source" target="_blank" rel="noopener noreferrer">view the source code</a> and <a href="" id="link-glitch-remix" target="_blank" rel="noopener noreferrer">remix the project</a>.
+          </p>
+          
+          <script>
+            (function() {
+              // Add correct urls based of the window location.
+              const projectName = window.location.hostname.split('.')[0];
+              document.getElementById('link-glitch-source').setAttribute('href', 'https://glitch.com/edit/#!/' + projectName);
+              document.getElementById('link-glitch-remix').setAttribute('href', 'https://glitch.com/edit/#!/remix/' + projectName);
+            })();
+          </script>
+        </div>
+        
+        <div class="spacer"></div>
+      </section>
+    </div>
+    
+    <div id="page">
+      <!-- Game -->
+      <div id="app">
+        <video id="video_raw" hidden></video>
+        <canvas id="time"></canvas>
+        <canvas id="video"></canvas>
+        <canvas id="pose"></canvas>
+        <canvas id="text"></canvas>
+        <canvas id="fade"></canvas>
+      </div>
+    </div>
+    
+    <!-- Utility scripts -->
+    <script type="text/javascript" src="/scripts/menu.js" async defer></script>
+    <!-- Script libraries -->
+    <script src="https://unpkg.com/@tensorflow/tfjs@0.14.2/dist/tf.min.js"></script>
+    <script src="https://unpkg.com/@tensorflow-models/posenet@0.2.3/dist/posenet.min.js"></script>
+    <script src="/scripts/libraries/compute-cosine-distance.js"></script>
+    <!-- Custom scripts. -->
+    <script type="module" src="/scripts/app.js"></script>
+  </body>
+</html>
